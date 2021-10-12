@@ -5,13 +5,21 @@
       <p><strong>Название книги:</strong> {{ book.title }} </p>
       <p><strong>Описание книги:</strong> {{ book.volumeInfo.description.substr(0, 200) + '...'}} </p>
       <p><strong>Цена:</strong> {{ book.saleInfo.listPrice.amount }} грн</p>
-      <input v-model.trim="name" id="name" type="text">
-      <label for="name">Name:</label>
-      <input v-model.trim="email" id="email" type="text">
-      <label for="email">Email</label>
+
+      <div class="form">
+        <input v-model.trim="name" id="name" type="text">
+        <label for="name">Name:</label>
+
+        <input v-model.trim="email" id="email" type="text">
+        <label for="email">Email</label>
+
+        <input v-model.trim="email" id="phone" type="text">
+        <label for="phone">Phone</label>
+      </div>
+
       <div class="btn-box">
         <button
-            @click="rightBtnAction(), closePopup()"
+            @click="rightBtnAction(), closePopup(), valid()"
             class="btn">
           {{ rightBtnTitle }}
         </button>
@@ -22,7 +30,6 @@
 </template>
 
 <script>
-import {required, maxLength, email} from 'vuelidate/lib/validators';
 
 export default {
   name: "Popup",
@@ -38,28 +45,16 @@ export default {
     closePopup() {
       this.$emit('closePopup')
     },
-    submitHandler() {
-      if (this.$v.$invalid) {
-        this.$v.$touch()
-        return
-      }
-    },
+
     rightBtnAction(){
       this.$emit('rightBtnAction')
-    }
-  },
-  validations: {
-    name: {
-      required,
-      maxLength: maxLength(10),
     },
-    email: {
-      required,
-      email
-    },
-    phone: {
-      required,
-      maxLength: maxLength(13),
+    valid(){
+      if(this.name > 5){
+        console.log('error')
+      } else {
+        this.closePopup()
+      }
     }
   }
 }

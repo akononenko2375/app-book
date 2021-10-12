@@ -25,6 +25,8 @@
       </div>
     </div>
 
+    <div class="message-box" v-if="message">{{ text }}</div>
+
     <h4 v-if="books">Catalog</h4>
     <CatalogItem
         v-for="book in books"
@@ -45,10 +47,11 @@ export default {
   data() {
     return {
       keyword: '',
+      text: 'Ваш заказ был успешно оформлен!'
     }
   },
   computed: {
-    ...mapGetters(['books', 'cart', 'order'])
+    ...mapGetters(['books', 'cart', 'message'])
   },
   methods: {
     ...mapActions(['addToCartProduct', 'getData']),
@@ -58,9 +61,6 @@ export default {
     showBooks() {
       this.getData(this.keyword);
       this.keyword = ''
-    },
-    doOrder() {
-      console.log('hello');
     }
   }
 
@@ -95,5 +95,15 @@ export default {
   position: absolute;
   top: 10px;
   left: 25px;
+}
+.message-box {
+  border: 1px solid teal;
+  padding: 15px;
+  text-align: center;
+  margin: 20px 0;
+  background-color: teal;
+  color: white;
+  text-transform: uppercase;
+  border-radius: 10px;
 }
 </style>

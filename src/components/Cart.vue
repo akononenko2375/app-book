@@ -17,12 +17,18 @@
         @decrement="decrement(index)"
     />
     <router-link :to="{name: 'home'}">
-      <button @click="doOrder" class="pay btn">Заказать</button>
+      <div v-if="cartData.length" class="cart__total">
+        <div class="box-price">
+          <p class="total__name">TOTAL PRICE: {{ cartTotalCost | toFix | formattedPrice }}</p>
+        </div>
+        <div class="box-btn">
+          <button @click="doOrder()" class="pay btn" >Заказать</button>
+        </div>
+      </div>
+
+
     </router-link>
-    <div class="cart__total">
-      <p class="total__name">Total price:</p>
-      <p>{{ cartTotalCost | toFix | formattedPrice }} грн</p>
-    </div>
+
   </div>
 </template>
 
@@ -48,7 +54,7 @@ export default {
     toFix
   },
   methods: {
-    ...mapActions(['delElemFromCart', 'incrementCartItem', 'decrementCartItem', 'orderTrue']),
+    ...mapActions(['delElemFromCart', 'incrementCartItem', 'decrementCartItem', 'orderTrue', 'showMessage']),
     delFromCart(index) {
       this.delElemFromCart(index);
     },
@@ -60,6 +66,8 @@ export default {
     },
     doOrder() {
       this.orderTrue()
+      this.showMessage()
+
     }
   },
   computed: {
@@ -100,13 +108,14 @@ h4 {
 }
 
 .cart__total {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  padding: 16px 24px;
+  /*position: fixed;*/
+  /*bottom: 0;*/
+  /*right: 0;*/
+  /*left: 0;*/
+  padding: 15px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   background: teal;
   color: #ffffff;
   font-size: 20px;

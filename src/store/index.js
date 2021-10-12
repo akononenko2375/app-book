@@ -7,6 +7,7 @@ let store = new Vuex.Store({
   state: {
     books: null,
     cart: [],
+    message: false,
   },
   mutations: {
     getData: (state, payload) => {
@@ -42,6 +43,13 @@ let store = new Vuex.Store({
     },
     orderTrue: (state) => {
       state.cart = [];
+      state.books = null
+    },
+    showMessage: (state) => {
+      state.message = true
+      setTimeout(() => {
+        state.message = false
+      }, 5000)
     }
   },
   actions: {
@@ -64,6 +72,9 @@ let store = new Vuex.Store({
     },
     orderTrue({commit}) {
       commit('orderTrue')
+    },
+    showMessage({commit}) {
+      commit('showMessage')
     }
   },
   getters: {
@@ -75,6 +86,9 @@ let store = new Vuex.Store({
     },
     order(state) {
       return state.order
+    },
+    message(state) {
+      return state.message
     },
 
 
