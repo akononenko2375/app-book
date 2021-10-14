@@ -3,6 +3,7 @@
     <img :src="cartItemData.volumeInfo.imageLinks.thumbnail" alt="">
     <div class="info">
       <p>Название: {{ cartItemData.volumeInfo.title }}</p>
+<!--      <p>Описание: {{ cartItemData.volumeInfo.description.substr(0, 200) + '...'}}</p>-->
       <p>Цена: {{ cartItemData.saleInfo.listPrice.amount }} грн</p>
     </div>
     <div class="quantity">
@@ -42,6 +43,7 @@ export default {
 .cart-item {
   padding: 15px;
   display: flex;
+  flex-basis: auto;
   justify-content: space-between;
   align-items: center;
   flex-wrap: nowrap;

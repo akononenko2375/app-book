@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>
-
+<!--    <Valid />-->
     <div class="message-box" v-if="message">{{ text }}</div>
 
     <h4 v-if="books">Catalog</h4>
@@ -39,6 +39,7 @@
 
 <script>
 import CatalogItem from "@/components/CatalogItem";
+// import Valid from '@/components/Valid';
 import {mapGetters, mapActions} from "vuex";
 
 export default {
